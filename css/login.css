@@ -1,0 +1,57 @@
+@charset 'utf-8';
+body{
+	background: url(../images/bg_frist_page.png) no-repeat fixed center;
+	background-size: 110%;	
+	color: #FFF;
+}
+#main-content form{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin:10% auto;
+	padding: 30px 55px;
+	width: 474px;
+	background-color: rgba(255,255,255,.1);
+	border-radius: 15px;
+}
+#main-content form span{
+	height: 40px;
+	margin: 0 20px 20px;
+	padding: 0 20px;
+	border-bottom:  3px solid transparent;
+	font-size: 22px;
+	opacity: .69;
+	cursor: pointer;
+}
+#main-content form span a:hover{
+	text-decoration: none;
+	color: #7f4a88;
+}
+#main-content .check a{
+	color: #7f4a88;	
+}
+#main-content form span:hover,#main-content .check{
+	color: #7f4a88;
+	border-bottom:  3px solid #7f4a88;
+}
+#main-content input{
+	height: 42px;
+	margin-bottom: 20px;
+	border: 1px solid #7F4A88;
+	border-radius: 5px;
+	color: #fff;
+	background-color: transparent;
+}
+#main-content form div{
+	width: 100%;
+	text-align: right;
+	margin-bottom: 10px;
+}
+#main-content .captch {
+	width:65%;
+	margin-right: 18px;
+}
+#captch{
+	width: 30%;
+	height: 42px;
+}

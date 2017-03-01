@@ -1,0 +1,24 @@
+@charset "utf-8";
+.wrap .fom{
+	width: 567px;
+	padding: 10px 75px 40px;
+	margin: auto;
+	border: 1px solid #F3EEF4;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.05);
+	border-radius: 15px;	
+}
+.wrap h2 span{
+	font-size: 14px;
+}
+.wrap .fom h3{
+	margin-bottom: 30px;
+	font-size: 22px;
+	color: #7F4A88;
+	text-align: center;
+}
+.wrap .fom input{
+	margin-bottom: 20px;
+}
+.button{
+	height: 42px;
+}

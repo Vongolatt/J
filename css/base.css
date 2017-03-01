@@ -1,0 +1,184 @@
+@charset "utf-8";
+html{
+	height: 100%;
+}
+body{
+	display: flex;
+	flex-direction: column;
+	justify-content:space-between;
+	align-items: center;
+	min-width: 1200px;
+	height: 100%;
+	font-family: PingFangSC-Regular;
+}
+#header{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 60px;
+	padding: 15px 26px 15px 6px;
+	box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.20);
+	z-index: 999;
+	transition: all .7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+#header.scroll{
+	padding: 6px 36px 6px 16px;
+	height: 40px;
+	background-color:rgba(127,74,136,.75);
+}
+#header>a img{
+	transition: all .7s cubic-bezier(0.68, -0.55, 0.27, 1.55);	
+}
+#header.scroll>a img{
+	transform: scale(.7);
+}
+#header div{
+	float: right;
+	height: 30px;
+	line-height: 30px;
+	font-size: 0;
+}
+#header.scroll div>img:first-child{
+	transform: scale(.8);	
+}
+#header div>img:first-child{
+	width: 35px;
+	height: 35px;
+	margin-right: 8px;
+	transition: all .7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+#header div>span{
+	position: relative;
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	vertical-align: middle;
+}
+#header div>span:hover>.hid{
+	width: 121px;
+	height: 136px;
+	opacity: 1;
+	transition-property: height opacity;
+	transition-duration: .4s;
+}
+#header div>span:hover>img{
+	transform: rotate(-180deg);
+}
+#header div>span>img{
+	vertical-align: top;
+	cursor: pointer;
+	transition: all .4s;
+}
+#header .hid{
+	position: absolute;
+	right:-15px;
+	z-index: 99;
+	padding: 22px 0;
+	background-image: url(../images/bg_center.png);
+	line-height: 30px;
+	opacity: 0;
+}
+#header .hid .icon{
+	display: inline-block;
+	width: 100%;
+	height: 14px;
+	margin: 0;
+}
+#header .hid .icon1{
+	background:url('../images/my_center.png') no-repeat center;
+}
+#header .hid .icon2{
+	background: url(../images/my_setting.png) no-repeat center;
+}
+#header .hid .icon3{
+	background: url(../images/my_out.png) no-repeat center;
+}
+#header .hid .icon1:hover{
+	background: url('../images/my_center_mark.png') no-repeat center;
+}
+#header .hid .icon2:hover{
+	background: url(../images/my_setting_mark.png) no-repeat center;
+}
+#header .hid .icon3:hover{
+	background: url(../images/my_out_mark.png) no-repeat center;
+}
+#header a{
+	margin-left: 20px;
+	vertical-align: middle;
+	font-size: 14px;
+}
+#header div a>img{
+	margin-top: -3px;
+}
+#main-content{
+	margin-top: 60px;
+}
+#main-content .form-control:focus{
+	border-color:#7F4A88;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(127,74,136,.29);
+}
+.bg-color{
+	background-color:#7f4a88;	
+}
+.transparent{
+	background-color:rgba(127,74,136,.29);
+}
+#footer{
+	width: 100%;
+	font-size: 13px;
+}
+#footer p{
+	margin: 0;
+	border-top:1px solid #FFFFFF;;
+	line-height: 60px;
+	text-align: center;
+}
+.btn{
+	color: #fff;
+	margin-bottom: 20px;
+	background-color: #7f4a88;
+}
+.btn:hover, .btn:focus, .btn.focus,a,a:hover, a:focus, a.focus{
+	color: #fff;
+}
+.button{
+	opacity: 0.69;
+	background: #222629;
+	border-radius: 5px;	
+}
+#backTop{
+	display: none;
+	position: fixed;
+	left: 1200px;
+	bottom: 20%;	
+	width: 45px;
+	height: 45px;
+	background: url(../images/back_top.png) no-repeat center;
+	cursor: pointer;
+}
+/*预加载图片*/
+#pre1 { background: url(../images/my_center_mark.png)}
+#pre2 { background: url(../images/my_setting_mark.png)}
+#pre3 { background: url(../images/my_out_mark.png)}
+/*+1动画*/
+#main-content .num{
+	display: none;
+	position: absolute;
+    top: -5px;
+	color: #7F4A88;
+    transition: all .3s;
+    opacity: 0;
+    z-index: -1;
+}
+#main-content .num.check{
+	display: block;
+	animation:upTo .5s ease-out;
+}
+@keyframes upTo{
+	0%   {opacity: 1;top: -8px;}
+	25%  {opacity: .9;top: -10px;}
+	50%  {opacity: .6;top: -12px;}
+	75% {opacity: .4;top: -14px;}
+	100% {opacity: 0;top: -16px;}
+}

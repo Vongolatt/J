@@ -1,0 +1,121 @@
+@charset "utf-8";
+body{
+	font-size: 14px;
+	color: #222629;	
+}
+#main-content {
+	position: relative;
+	width: 906px;
+	margin: 90px 0;
+}
+#main-content h4{
+	display: inline-block;
+	margin:0 60px 0 0;
+	vertical-align: middle;
+	font-weight: 600;
+}
+#main-content>.wrap{
+	margin: 20px 0 15px;
+	width: 400px;
+}
+#main-content .share{
+	cursor: pointer;
+}
+#main-content .left,#main-content .right{
+	display: inline-block;
+	width: 49%;
+	height: 36px;
+	vertical-align: top;
+}
+#main-content .left>img{
+	width: 36px;
+	height: 36px;
+	background-color: #000;
+	border-radius: 50%;
+}
+#main-content .left>span{
+	vertical-align: middle;
+	margin: 0 25px 0 10px; 
+}
+#main-content .right {
+	position: relative;
+	text-align: right;
+	line-height: 35px;
+}
+#main-content .right>img{
+	margin: 0 8px 0 30px;
+}
+#main-content .right .like{
+	cursor: pointer;
+}
+#main-content .right .num{
+    left: 53px;
+}
+#main-content .right>span{
+	vertical-align: middle;
+}
+#main-content>.wrap+img{
+	width: 100%;
+	height: 375px;
+}
+#main-content .article{
+	padding: 35px 0;
+	border-bottom: 1px solid rgba(127,74,136,.5);
+}
+#main-content p{
+	line-height: 22px;
+	text-indent: 28px;
+}
+#main-content .comment h5{
+	margin: 25px 0;
+	clear: right;
+}
+#main-content .comment textarea{
+	resize: none;
+	width: 100%;
+	height: 103px;
+	padding: 8px;
+	background: rgba(127,74,136,.2);
+	border-radius: 5px;
+}
+#main-content .comment button{
+	float: right;
+	margin-top: 20px;
+	padding: 6px 25px;
+}
+#main-content .comment section{
+	padding: 20px 0 36px;
+	margin-top: 20px;
+	border-top: 1px solid rgba(127,74,136,.5);
+}
+#main-content .comment .left{
+	width: 100%;
+}
+#main-content .comment p{
+	margin-top: 10px;
+	text-indent: 51px;
+}
+#main-content .hid{
+	display: block;
+	position: absolute;
+	left: 330px;
+	width: 159px;
+	height: 0;
+	background: url(../images/bg_share.png);
+	text-align: center;
+	overflow: hidden;
+}
+#main-content .share:hover .hid{
+	padding-top: 18px;
+	height: 200px;
+	transition: height .3s;
+	z-index: 1;
+}
+#main-content .hid>img{
+	width: 81.8%;
+	height: 130px;
+	margin-top: 12px;
+}
+#footer>p{
+	border-top-color: #7F4A88;
+}

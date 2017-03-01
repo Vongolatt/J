@@ -1,0 +1,25 @@
+@charset "utf-8";
+#main-content .wrap{
+	width: 671px;
+	margin: 20px 0;
+}
+#main-content .wrap h2{
+	padding: 15px 0;
+	margin-bottom: 25px;
+	border-bottom: 1px solid rgba(127,74,136,.69);
+	font-size: 16px;
+}
+#main-content .form-control{
+	height: 42px;
+}
+#main-content .captch {
+	width:65%;
+	margin-right: 16px;
+}
+#captch{
+	width: 30%;
+	height: 42px;
+}
+#footer>p{
+	border-top-color: #7F4A88;
+}

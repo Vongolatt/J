@@ -1,0 +1,49 @@
+@charset "utf-8";
+.radio input[type=radio]{
+	height: 0;
+	width: 0;
+}
+.radio input[type=radio]+label{
+	position: relative;
+	padding:0 5px 0 25px;
+}
+.radio input[type=radio]+label::before{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 18px;
+	height: 18px;
+	border:1px solid #ccc;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: all .3s ease-in;
+	-webkit-animation: hue 30s infinite linear;
+}
+.radio input[type=radio]+label::after{
+	content: '';
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;	
+	background-color:  #fff;
+	transition: all .3s ease-in;
+}
+.radio input[type=radio]:checked+label::before{
+	background-color:  #7F4A88;
+	opacity: 1;
+}
+.radio input[type=radio]+label:hover::before{
+	background-color:  #7F4A88;
+	opacity: .5
+}
+@keyframes hue {
+	from {
+		-webkit-filter: hue-rotate(-92deg);
+	}
+	to {
+		-webkit-filter: hue-rotate(360deg);
+	}
+}

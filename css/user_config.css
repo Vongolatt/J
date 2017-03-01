@@ -1,0 +1,29 @@
+#main-content .wrap>div{
+	width: 100%;
+	padding: 30px 55px;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.05);
+	border-radius: 15px;
+}
+#main-content .wrap .item{
+	margin-bottom: 20px;
+}
+#main-content .item .left{
+	margin-right: 22px;
+}
+#main-content .item .form-control{
+	width: 220px;
+	height: 36px;
+	margin-right: 24px;
+}
+#main-content .item .up{
+	display: inline-block;
+	width: 62.5px;
+	height: 62.5px;
+	line-height: 62.5px;
+	border-radius: 50%;
+	background-color: #c05656;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+	cursor: pointer;
+}

@@ -1,0 +1,46 @@
+@charset "utf-8";
+#main-content{
+	width: 100%;
+	margin-top: 0;
+}
+h1{
+	width: 998px;
+	margin: 0 auto;
+	padding: 15px 0;
+	opacity: 0.5;
+	border-bottom: 1px solid #7F4A88;
+	font-size: 16px;
+}
+#main-content .bg{
+	background: url(../images/image1_center.jpg) scroll no-repeat center 100%;
+	width: 100%;
+	min-width: 1200px;
+	height: 360px;
+	padding-top: 60px;
+	color: #fff;
+}
+#main-content .bg .wrap{
+	position: relative;
+	width: 100px;
+	height: 162px;
+	line-height: 25px;
+	margin:70px auto;
+	text-align: center;
+}
+#main-content .bg span:nth-child(2){
+	font-size: 18px;
+}
+#main-content .bg img{
+	width: 91px;
+	height: 91px;
+	border-radius: 50%;
+	margin-bottom: 30px;
+
+}
+#main-content .bg .sex{
+	position: absolute;
+	width: 27px;
+	height: 27px;
+	right: 10px;
+	top: 66px;
+}
