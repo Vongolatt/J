@@ -18,14 +18,16 @@ if (!localStorage.token) {
 		scrollListern();
 	});
 	//悬浮提示
-	$('.like').hover(function() {
+	$('#main-content').on('mouseover mouseout','.like',function() {
 		if ($(event.target).hasClass('check')) return;
-		event.target.src = '../images/like_mark.png';
-	}, function() {
-		if ($(event.target).hasClass('check')) return;
-		event.target.src = '../images/like.png';
+		if(event.type == "mouseover"){
+			event.target.src = '../images/like_mark.png';
+		}
+		else if(event.type == "mouseout"){
+			event.target.src = '../images/like.png';
+		}
 	})
-	.click(function(event) {
+	.on('click','.like',function() {
 		//请求接口
 		//成功后
 		event.target.src = '../images/like_mark.png';
@@ -69,4 +71,10 @@ function scrollListern (argument) {
 	else {
 		$('#header').removeClass('scroll');
 	}
+}
+//定义切取url参数的函数
+function getQueryString(name) {  
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i").exec(window.location.search.substr(1));   
+        if (reg != null) return reg[2];  
+        return null;  
 }

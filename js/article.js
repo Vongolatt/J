@@ -1,10 +1,31 @@
 $(function () {
+	//开始是假用来判断瀑布流多次相应ajax时阻止请求;
+	var start_time = new Date();
+	//请求文章列表
+	loadArticle(_page);
+	//lazyload
+	$(window).scroll(function(event) {
+		var loading = document.querySelector('.loading');
+		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
+			//比较两次请求时间是否过短 
+			var cur_time = new Date();
+			if (cur_time-start_time<1000) return;
+			//延时加载
+			setTimeout(function () {
+				loadArticle(_page);
+			},1000);
+			start_time = cur_time;
+		}
+	});
+});
+var _page = 1;
+function loadArticle (page) {
 	$.ajax({
 		url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/query/article',
 		type: 'GET',
 		dataType: 'json',
 		data: {
-			page:1,
+			page:page,
 			limit:10,
 		},
 	})
@@ -19,9 +40,9 @@ $(function () {
 		//生成文章列表
 		for (var i = 0; i < dt.length; i++) {
 			str+='<section class="article">';
-			str+='<a href="article_details.html?'+dt[i]._id+'"><img src="'+dt[i].cover+'"></a>';
+			str+='<a href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+page+'"><img src="'+dt[i].cover+'"></a>';
 			str+='<div class="wrap">';
-			str+='<a href="article_details.html?'+dt[i]._id+'"><h2>'+dt[i].title+'</h2></a>';
+			str+='<a href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='<div><div class="left">';
 			str+='<img src="'+dt[i].user.avatar+'">';
@@ -38,10 +59,10 @@ $(function () {
 			str+='</div></section>';			
 		}
 		//写入文章内容
-		$('#main-content').html(str);
+		$('#main-content').append(str);
+		_page++;
 	})
 	.fail(function() {
 		$('#main-content').html('请求内容失败，请稍后重试');
-	});
-	
-})
+	})
+}

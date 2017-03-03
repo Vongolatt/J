@@ -182,3 +182,15 @@ body{
 	75% {opacity: .4;top: -14px;}
 	100% {opacity: 0;top: -16px;}
 }
+.loading{
+	margin-bottom: 20px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	opacity: 0.4;
+	font-size: 16px;
+}
+.loading>span{
+	vertical-align: middle;
+	margin-left: 20px;
+}

@@ -6,7 +6,7 @@ body{
 #main-content {
 	position: relative;
 	width: 906px;
-	margin: 90px 0;
+	margin: 90px 0 0;
 }
 #main-content h4{
 	display: inline-block;
@@ -16,7 +16,7 @@ body{
 }
 #main-content>.wrap{
 	margin: 20px 0 15px;
-	width: 400px;
+	width: 505px;
 }
 #main-content .share{
 	cursor: pointer;
@@ -49,7 +49,10 @@ body{
 	cursor: pointer;
 }
 #main-content .right .num{
-    left: 53px;
+    left: 109px;
+}
+#main-content section .right .num{
+	right: 23px;
 }
 #main-content .right>span{
 	vertical-align: middle;
@@ -63,8 +66,12 @@ body{
 	border-bottom: 1px solid rgba(127,74,136,.5);
 }
 #main-content p{
-	line-height: 22px;
+	line-height: 35px;
 	text-indent: 28px;
+	font-size: 16px;
+}
+#main-content .comment{
+	overflow: hidden;
 }
 #main-content .comment h5{
 	margin: 25px 0;
@@ -82,14 +89,19 @@ body{
 	float: right;
 	margin-top: 20px;
 	padding: 6px 25px;
+	margin-bottom: 20px;
 }
 #main-content .comment section{
 	padding: 20px 0 36px;
 	margin-top: 20px;
 	border-top: 1px solid rgba(127,74,136,.5);
+	clear: right;
 }
 #main-content .comment .left{
 	width: 100%;
+}
+#main-content .comment .right{
+	width: 67%;
 }
 #main-content .comment p{
 	margin-top: 10px;
