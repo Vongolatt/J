@@ -20,6 +20,9 @@ body{
 	margin-right: 25px;	
 	vertical-align: top;
 }
+#main-content>.article a:hover h2{
+	text-decoration: underline;
+}
 #main-content>.article>.wrap{
 	width: 527px;
 }
@@ -29,9 +32,21 @@ body{
 	margin: 35px 0 25px;
 }
 #main-content .wrap>p{
+	position: relative;
 	line-height: 24px;
 	text-indent: 5%;
 	margin-bottom: 30px;
+	height: 72px;
+	overflow: hidden;
+}
+#main-content .wrap>p::after{
+	content:'...';
+	position: absolute;
+	text-indent: 0;
+	bottom: 0;
+	right: 9px;
+	width: 14px;
+	background-color: #fff;
 }
 #main-content .left,#main-content .right{
 	display: inline-block;
@@ -47,7 +62,7 @@ body{
 }
 #main-content .left>span{
 	vertical-align: middle;
-	margin: 0 25px 0 10px; 
+	margin: 0 20px 0 10px; 
 }
 #main-content .right {
 	position: relative;
@@ -66,13 +81,14 @@ body{
 #main-content .right span{
 	vertical-align: middle;
 }
-#main-content .loading{
+.loading{
+	margin-bottom: 20px;
 	height: 40px;
 	text-align: center;
 	opacity: 0.4;
 	font-size: 16px;
 }
-#main-content .loading>span{
+.loading>span{
 	vertical-align: middle;
 	margin-left: 20px;
 }
