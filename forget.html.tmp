@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>登录</title>
+	<title>找回密码</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/base.css">
@@ -15,24 +15,22 @@
 	<section id="main-content">
 	<!-- 注册 -->
 		<form role="form" data-toggle="validator" method="post" action="http://192.168.1.8:8700/B1Q1tzZqx/v1/account/login" id="register-form" target="iframe">
-			<span class="check"><a href="login.html">登录</a></span><span><a href="register.html">注册</a></span>
+			<span>找回密码</span>
 			<div class="form-group">
 				<input id="mobile" name="account" type="text" class="form-control" placeholder="请输入手机号码" maxlength="11" required="required" data-required-error="请输入手机号" pattern="^1\d{10}$" data-pattern-error="请输入11位手机号">
 				<div class="help-block with-errors"></div>
 			</div>
 			<div class="form-group">
-				<input id="pwd" type="password" class="form-control" placeholder="请输入6~32位密码"  maxlength="32" data-minlength="6" name="password" required data-required-error="请输入密码" pattern="[A-Za-z].*[0-9]|[0-9].*[A-Za-z]" data-pattern-error="请输入数字和字母混合6位以上密码">
-				<a id="forget" href="forget.html">忘记密码？</a>
+				<input type="text" class="form-control captch" name="captcha" placeholder="请输入短信验证码" maxlength="6" required="required" data-required-error="请输入验证码"  pattern="^\d{6}$" data-pattern-error="请输入6位验证码">
+				<button type="button" id="captch" class="btn">获取验证码</button>
 				<div class="help-block with-errors"></div>
 			</div>
-			<button id="login" type="submit" class="btn  form-control button">登录</button>
-			<a href="register.html"><p style="margin: 10px 0;">还没有账户，马上注册</p></a>
+			<button type="submit" class="btn  form-control button">下一步</button>
 		</form>
 	</section>
 	<footer id="footer">
 		<p>Copyright © 2015-2016 jiefuzi.com All Rights Reserved | 陕ICP备 13044542号-2</p>
 	</footer>
-	<iframe name="iframe" frameborder="0" height="0" width="0;"></iframe>
 <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>

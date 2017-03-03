@@ -1,4 +1,8 @@
 $(function () {
+if (!localStorage.token) {
+	localStorage.token= "3ff8ff6611f8344dd0fbad6c2b459403aff2c93e";
+	localStorage.img = 'https://unsplash.it/1080/720?image=688';
+}
 	//页面加载后执行一次滚动监听；
 	scrollListern();
 	//返回顶部
@@ -35,6 +39,19 @@ $(function () {
 			event.target.classList.add('check');			
 		}
 	});
+	//判断登陆状态;
+	if (localStorage.token) {
+		//登陆成功显示用户信息;
+		var login_info = '<img src='+localStorage.img+' alt="">';
+			login_info+= '<span>lvlu<img src="../images/pull_down.png" alt="">';
+			login_info+='<div class="hid">';
+			login_info+='<a href="user.html" class="icon icon1"></a>';
+			login_info+='<a href="user_config.html" class="icon icon2"></a>';
+			login_info+='<a href="" class="icon icon3"></a>';
+			login_info+='</div></span>';
+			login_info+='<a href="../user/write.html"><img src="../images/write.png" alt="写文章"></a>';
+		$('#header').children('div').first().html(login_info);
+	}
 //jq结尾
 });
 function scrollListern (argument) {
@@ -53,18 +70,3 @@ function scrollListern (argument) {
 		$('#header').removeClass('scroll');
 	}
 }
-// $.ajax({
-// 	url: 'http://192.168.1.8:8081/api/posts/list?page=1&limit=10',
-// 	type: 'GET',
-// 	dataType: 'json',
-// 	data: {   },
-// })
-// .done(function() {
-// 	console.log("success");
-// })
-// .fail(function() {
-// 	console.log("error");
-// })
-// .always(function() {
-// 	console.log("complete");
-// });

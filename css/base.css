@@ -40,6 +40,7 @@ body{
 }
 #header.scroll div>img:first-child{
 	transform: scale(.8);	
+	margin-top: -3px;
 }
 #header div>img:first-child{
 	width: 35px;
@@ -136,7 +137,6 @@ body{
 }
 .btn{
 	color: #fff;
-	margin-bottom: 20px;
 	background-color: #7f4a88;
 }
 .btn:hover, .btn:focus, .btn.focus,a,a:hover, a:focus, a.focus{
