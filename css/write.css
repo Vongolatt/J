@@ -14,7 +14,7 @@
 	width: 896px;
 	margin: 0 auto;
 }
-#main-content .wrap .back{
+#main-content .wrap .upload-background{
 	margin-top: -20px;
 	padding: 1px;
 	height: 257px;
@@ -22,7 +22,7 @@
 	background: rgba(127,74,136,.35) url(../images/camera.png) no-repeat scroll center 40%;
 	cursor: pointer;
 }
-#main-content .back p{
+#main-content .upload-background p{
 	margin-top: 140px;
 }
 #main-content .width img{

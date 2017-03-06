@@ -40,7 +40,7 @@ function loadArticle (page) {
 		//生成文章列表
 		for (var i = 0; i < dt.length; i++) {
 			str+='<section class="article">';
-			str+='<a href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+page+'"><img src="'+dt[i].cover+'"></a>';
+			str+='<a href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+page+'"><img id="'+page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
 			str+='<div class="wrap">';
 			str+='<a href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
@@ -56,7 +56,8 @@ function loadArticle (page) {
 			str+='<img src="../images/saw.png">';
 			str+='<span>'+dt[i].preview_sum+'</span>';
 			str+='</div></div>';
-			str+='</div></section>';			
+			str+='</div></section>';
+			preLoad_images(dt[i].cover,page+''+i);		
 		}
 		//写入文章内容
 		$('#main-content').append(str);
@@ -65,4 +66,18 @@ function loadArticle (page) {
 	.fail(function() {
 		$('#main-content').html('请求内容失败，请稍后重试');
 	})
+}
+
+function preLoad_images(img_src,id){
+	var temp_img = new Image();
+	//图片加载成功后，替换临时图片
+	temp_img.onload = function(){
+		$('#'+id).attr('src', img_src);
+	}
+	//加载失败
+	temp_img.onerror = function(){
+		$('#'+id).attr('src', '../images/u=3083093071,1461152719&fm=23&gp=0.jpg');
+	}
+	//预加载图片
+	temp_img.src =  img_src;
 }

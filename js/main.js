@@ -47,8 +47,8 @@ if (!localStorage.token) {
 		var login_info = '<img src='+localStorage.img+' alt="">';
 			login_info+= '<span>lvlu<img src="../images/pull_down.png" alt="">';
 			login_info+='<div class="hid">';
-			login_info+='<a href="user.html" class="icon icon1"></a>';
-			login_info+='<a href="user_config.html" class="icon icon2"></a>';
+			login_info+='<a href="../user/user.html" class="icon icon1"></a>';
+			login_info+='<a href="../user/user_config.html" class="icon icon2"></a>';
 			login_info+='<a href="" class="icon icon3"></a>';
 			login_info+='</div></span>';
 			login_info+='<a href="../user/write.html"><img src="../images/write.png" alt="写文章"></a>';
