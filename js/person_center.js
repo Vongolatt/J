@@ -1,33 +1,30 @@
-$(function () {
-	//开始是假用来判断瀑布流多次相应ajax时阻止请求;
-	var start_time = new Date();
-	//请求文章列表
+var _page =1;
+$(function(){
 	loadArticle(_page);
-	//lazyload
+	//页面拉到底部加载评论;
+	var start_time =new Date();
 	$(window).scroll(function(event) {
 		var loading = document.querySelector('.loading');
 		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
 			//比较两次请求时间是否过短 
 			var cur_time = new Date();
 			if (cur_time-start_time<1000) return;
-			//延时加载
-			setTimeout(function () {
-				loadArticle(_page);
-			},1000);
+			//延时加载评论列表
+			setTimeout(loadArticle,1000);
 			start_time = cur_time;
 		}
 	});
-});
-var _page = 1;
-function loadArticle (page) {
+})
+function loadArticle(){
 	$.ajax({
-		url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/query/article',
+		url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/account/article/query',
 		type: 'GET',
 		dataType: 'json',
 		data: {
-			page:page,
-			limit:10,
-		},
+			token:localStorage.token,
+			page:_page,
+			limit:10
+	}
 	})
 	.done(function(dt) {
 		//错误时返回;
@@ -39,10 +36,11 @@ function loadArticle (page) {
 		var str='';
 		//生成文章列表
 		for (var i = 0; i < dt.length; i++) {
+			str+='<h1>文章(<span>'+dt.length+'</span>)</h1>';
 			str+='<section class="article">';
-			str+='<a href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+page+'"><img id="'+page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
+			str+='<a href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+_page+'"><img id="'+_page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
 			str+='<div class="wrap">';
-			str+='<a href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+page+'"><h2>'+dt[i].title+'</h2></a>';
+			str+='<a href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+_page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='<div><div class="left">';
 			str+='<img src="'+dt[i].user.avatar+'">';
@@ -57,14 +55,12 @@ function loadArticle (page) {
 			str+='<span>'+dt[i].preview_sum+'</span>';
 			str+='</div></div>';
 			str+='</div></section>';
-			preLoad_images(dt[i].cover,page+''+i);		
+			preLoad_images('http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].cover,_page+''+i);		
 		}
 		//写入文章内容
 		$('#main-content').append(str);
 		_page++;
 	})
 	.fail(function() {
-		$('#main-content').html('请求内容失败，请稍后重试');
-	})
+	});	
 }
-

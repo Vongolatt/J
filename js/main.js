@@ -51,7 +51,10 @@ if (!localStorage.token) {
 			login_info+='<a href="../user/user_config.html" class="icon icon2"></a>';
 			login_info+='<a href="" class="icon icon3"></a>';
 			login_info+='</div></span>';
-			login_info+='<a href="../user/write.html"><img src="../images/write.png" alt="写文章"></a>';
+			if (window.location.href == 'http://www.j.com/project/J/user/write.html') {
+				login_info+='<a href="javascript:;"><img src="../images/publish.png" alt="发布"></a>';
+			}
+			else{login_info+='<a href="../user/write.html"><img src="../images/write.png" alt="写文章"></a>';}
 		$('#header').children('div').first().html(login_info);
 	}
 //jq结尾
@@ -77,4 +80,18 @@ function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i").exec(window.location.search.substr(1));   
         if (reg != null) return reg[2];  
         return null;  
+}
+//预加载图片
+function preLoad_images(img_src,id){
+	var temp_img = new Image();
+	//图片加载成功后，替换临时图片
+	temp_img.onload = function(){
+		$('#'+id).attr('src', img_src);
+	}
+	//加载失败
+	temp_img.onerror = function(){
+		$('#'+id).attr('src', '../images/u=3083093071,1461152719&fm=23&gp=0.jpg');
+	}
+	//预加载图片
+	temp_img.src =  img_src;
 }

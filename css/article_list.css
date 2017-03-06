@@ -50,9 +50,12 @@ body{
 }
 #main-content .left,#main-content .right{
 	display: inline-block;
-	width: 49%;
+	width: 56%;
 	height: 36px;
 	vertical-align: top;
+}
+#main-content .right{
+	width: 44%;
 }
 #main-content .left>img{
 	width: 36px;
@@ -76,7 +79,7 @@ body{
     left: 116px;
 }
 #main-content .right img{
-	margin: 0 8px 0 30px;
+	margin: 0 8px;
 }
 #main-content .right span{
 	vertical-align: middle;

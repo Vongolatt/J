@@ -10,6 +10,13 @@
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04);
 	border-radius: 2px;
 }
+#main-content .wrap .up{
+	cursor: pointer;
+}
+#main-content .wrap .up:hover .change-view{
+	opacity: .6;
+	text-decoration: underline;
+}
 #main-content .wrap .width{
 	width: 896px;
 	margin: 0 auto;
@@ -20,7 +27,6 @@
 	height: 257px;
 	width: 100%;
 	background: rgba(127,74,136,.35) url(../images/camera.png) no-repeat scroll center 40%;
-	cursor: pointer;
 }
 #main-content .upload-background p{
 	margin-top: 140px;
@@ -37,7 +43,6 @@
 	opacity: 0.5;
 	color: #fff;
 	background: #222629;
-	cursor: pointer;
 }
 #main-content .width>textarea{
 	min-width: 100%;

@@ -16,16 +16,19 @@ body{
 }
 #main-content>.wrap{
 	margin: 20px 0 15px;
-	width: 505px;
+	width: 644px;
 }
 #main-content .share{
 	cursor: pointer;
 }
 #main-content .left,#main-content .right{
 	display: inline-block;
-	width: 49%;
+	width: 56%;
 	height: 36px;
 	vertical-align: top;
+}
+#main-content .right{
+	width: 44%;
 }
 #main-content .left>img{
 	width: 36px;
