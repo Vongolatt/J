@@ -1,8 +1,4 @@
 $(function () {
-if (!localStorage.token) {
-	localStorage.token= "27f099ee0468fd9b9d5cf086bff5f6da370b3d9e";
-	localStorage.img = 'https://unsplash.it/1080/720?image=688';
-}
 	//页面加载后执行一次滚动监听；
 	scrollListern();
 	//返回顶部

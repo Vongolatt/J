@@ -27,3 +27,13 @@
 	text-align: center;
 	cursor: pointer;
 }
+#main-content  .up img{
+	width: 62.5px;
+	height: 62.5px;
+	vertical-align: top;
+	border-radius: 50%;
+}
+#main-content button{
+	width: 200px;
+	margin-left: 150px;
+}

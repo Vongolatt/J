@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>文章列表</title>
+	<title>个人中心</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/base.css">
@@ -27,33 +27,34 @@
 					<span class="left">头像：</span>
 					<div class="up">上传头像</div>
 				</div>
-				<div class="item"><span class="left">昵称：</span><input type="text" class="form-control"></div>
+				<div class="item"><span class="left">昵称：</span><input id="name" type="text" class="form-control"></div>
 				<div class="item" ><span class="left">性别：</span>
 					<div class="radio">
-						<input type="radio" name="sex" id="male" checked="checked">
-						<label for="male">男</label>
+						<input type="radio" name="sex" id="male" checked="checked" value="男">
+						<label for="male" >男</label>
 					</div>
 					<div class="radio">
-						<input type="radio" name="sex" id="female">
+						<input type="radio" name="sex" id="female" value="女">
 						<label for="female">女</label>
 					</div>
 				</div>
 				<div class="item"><span class="left">星座：</span>
-					<select name="" id="" class="form-control"></select>
+					<select name="" id="constellation" class="form-control"></select>
 				</div>
 				<div class="item"><span class="left">城市：</span>
-					<select name="" id="" class="form-control"></select>
-					<select name="" id="" class="form-control"></select>
+					<select name="" id="province" class="form-control"></select>
 				</div>
 				<div class="item"><span class="left">密码：</span>
 					<input type="password" class="form-control">
 				</div>
+				<button class="btn form-control">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
 			</div>
 		</div>
 	</div>
 	<span id="pre1"></span>
 	<span id='pre2'></span>
 	<span id="pre3"></span>
+	<input type="file" id="upload" accept="image/png,image/jpeg" style="display: none;" name="haah">
 	<footer id="footer">
 		<p>Copyright © 2015-2016 jiefuzi.com All Rights Reserved | 陕ICP备 13044542号-2</p>
 	</footer>
@@ -62,5 +63,6 @@
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="http://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" src="../js/per_config.js"></script>
 </body>
 </html>
