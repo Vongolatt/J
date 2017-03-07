@@ -104,7 +104,8 @@ function tip (message,fun) {
 	bootbox.alert({ 
 		size: "small",
 		title: "提示",
-		message: message, 
+		message: message,
+		backdrop: true,
 		callback: fun
 	}) 
 }

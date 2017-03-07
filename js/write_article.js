@@ -26,8 +26,10 @@ $(function(){
 	});
 	//发表文章
 	$('#header').on('click', 'img', function(event) {
-		if (!localStorage) return;
-		if (_file==undefined) return;
+		if (!localStorage.token) {tip('请先登录',function () {
+			window.location.href = '../login.html';
+		}); return;}
+		if (_file==undefined) {tip('请上传封面'); return;}
 		var formData = new FormData();
 		formData.append('cover', _file);
 		formData.append('token',localStorage.token);
@@ -43,7 +45,7 @@ $(function(){
   		contentType: false   // 告诉jQuery不要去设置Content-Type请求头
 		})
 		.done(function() {
-			console.log("success");
+			window.location.href= 'user.html';
 		});
 		
 	});

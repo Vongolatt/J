@@ -45,9 +45,11 @@
 	background: #222629;
 }
 #main-content .width>textarea{
+    padding: 10px;
 	min-width: 100%;
 	max-width: 100%;
 	min-height: 385px;
+	line-height: 25px;
 }
 #main-content .width>input{
 	border: none;
