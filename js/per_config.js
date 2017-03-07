@@ -116,13 +116,18 @@ $(function(){
 		//整合数据
 		var formData = new FormData();
 		formData.append('token',localStorage.token);
-		formData.append('name',$('#name').val());
-		if ($('#city')) {
+
+		if ($('#name').val()!='') formData.append('name',$('#name').val());
+		
+		if ($('#city').val()!='请选择'&&$('#city').val()!=undefined) {
 			formData.append('city',$('#province').val()+$('#city').val());
 		}
-		formData.append('gender',$("input[name='sex']:checked").val());
-		formData.append('avatar',_file);
-		formData.append('constellation',$('#constellation').val());
+		else if ($('#province').val()!='请选择') {
+			formData.append('city',$('#province').val());
+		}
+		if ($("input[name='sex']:checked").val()!='') formData.append('gender',$("input[name='sex']:checked").val());
+		if (_file!=undefined) formData.append('avatar',_file);
+		if ($('#constellation').val()!='请选择') formData.append('constellation',$('#constellation').val());
 		$.ajax({
 			url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/account/profile',
 			type: 'POST',
@@ -131,14 +136,12 @@ $(function(){
 			processData: false,  // 告诉jQuery不要去处理发送的数据
   			contentType: false   // 告诉jQuery不要去设置Content-Type请求头
 		})
-		.done(function() {
-			console.log("success");
+		.done(function(dt) {
+			localStorage.clear();
+			tip(dt.message,function () {window.location.href = '../login.html'});
 		})
 		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
+			tip('更新资料失败,请稍后重试')
 		});
 		
 	});

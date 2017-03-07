@@ -100,10 +100,11 @@ function preLoad_images(img_src,id){
 		temp_img.src =  img_src;
 	}
 }
-function tip (message) {
+function tip (message,fun) {
 	bootbox.alert({ 
 		size: "small",
 		title: "提示",
 		message: message, 
+		callback: fun
 	}) 
 }
