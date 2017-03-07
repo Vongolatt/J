@@ -19,18 +19,24 @@ $(function () {
 			str+='<span>请使用微信扫一扫</span><img src="" alt="">';
 			str+='</div></span>';
 			str+='<div class="wrap"><div class="left">';
-			str+='<img src="'+dt.user.avatar+'" alt=""><span>'+dt.user.name+'</span><span>'+moment(dt.create_time).format('YYYY-MM-DD HH:mm:ss')+'</span>';
+			//判断头像来源
+			if (dt.user.avatar.indexOf('http')===-1) {
+				str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt.user.avatar+'">';
+			}
+			else{str+='<img src="'+dt.user.avatar+'">';}
+			str+='<span>'+dt.user.name+'</span><span>'+moment(dt.create_time).format('YYYY-MM-DD HH:mm:ss')+'</span>';
 			str+='</div>';
 			str+='<div class="right">';
 			str+='<img src="../images/like.png" class="like"><span class="num">+1</span><span>'+dt.praise_sum+'</span><img src="../images/saw.png"><span>'+dt.preview_sum+'</span>';
 			str+='</div></div>';
-			str+='<img src="'+dt.cover+'">';
+			str+='<img id="cover" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg">';
 			str+='<div class="article"><p>'+dt.content+'<p></div>';
 			//我要评论
 			str+='<div class="comment">';
 			str+='<h5>文章点评</h5>';
 			str+='<textarea placeholder="我有话要说"></textarea>';
 			str+='<button class="btn">提&nbsp;&nbsp;&nbsp;&nbsp;交</button></div>';
+			preLoad_images(dt.cover,'cover');
 			$('#main-content').prepend(str);
 		})
 		.fail(function() {

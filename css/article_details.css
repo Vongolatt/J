@@ -23,12 +23,11 @@ body{
 }
 #main-content .left,#main-content .right{
 	display: inline-block;
-	width: 56%;
 	height: 36px;
 	vertical-align: top;
 }
 #main-content .right{
-	width: 44%;
+	float: right;
 }
 #main-content .left>img{
 	width: 36px;
