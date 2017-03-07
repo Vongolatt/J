@@ -45,7 +45,11 @@ function loadArticle (page) {
 			str+='<a href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='<div><div class="left">';
-			str+='<img src="'+dt[i].user.avatar+'">';
+			//判断头像来源
+			if (dt[i].user.avatar.indexOf('http')===-1) {
+				str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].user.avatar+'">';
+			}
+			else{str+='<img src="'+dt[i].user.avatar+'">';}
 			str+='<span>'+dt[i].user.name+'</span>';
 			str+='<span>'+moment(dt[i].create_time).format('YYYY-MM-DD HH:mm:ss')+'</span>';
 			str+='</div>';

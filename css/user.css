@@ -3,6 +3,9 @@
 	width: 100%;
 	margin-top: 0;
 }
+.modal-dialog{
+	color: #000;
+}
 h1{
 	width: 998px;
 	margin: 0 auto;

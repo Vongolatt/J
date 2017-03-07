@@ -40,12 +40,12 @@ $(function () {
 	//判断登陆状态;
 	if (localStorage.token) {
 		//登陆成功显示用户信息;
-		var login_info = '<img src='+localStorage.img+' alt="">';
-			login_info+= '<span>lvlu<img src="../images/pull_down.png" alt="">';
+		var login_info = '<img src=http://192.168.1.8:8700/B1Q1tzZqx/'+localStorage.avatar+' alt="">';
+			login_info+= '<span>'+localStorage.name+'<img src="../images/pull_down.png" alt="">';
 			login_info+='<div class="hid">';
 			login_info+='<a href="../user/user.html" class="icon icon1"></a>';
 			login_info+='<a href="../user/user_config.html" class="icon icon2"></a>';
-			login_info+='<a href="" class="icon icon3"></a>';
+			login_info+='<a href="" id="quit" class="icon icon3"></a>';
 			login_info+='</div></span>';
 			if (window.location.href == 'http://www.j.com/project/J/user/write.html') {
 				login_info+='<a href="javascript:;"><img src="../images/publish.png" alt="发布"></a>';
@@ -53,6 +53,10 @@ $(function () {
 			else{login_info+='<a href="../user/write.html"><img src="../images/write.png" alt="写文章"></a>';}
 		$('#header').children('div').first().html(login_info);
 	}
+	//退出登录
+	$('#header').on('click', '#quit', function(event) {
+		localStorage.clear();
+	});
 //jq结尾
 });
 function scrollListern (argument) {
@@ -82,12 +86,17 @@ function preLoad_images(img_src,id){
 	var temp_img = new Image();
 	//图片加载成功后，替换临时图片
 	temp_img.onload = function(){
-		$('#'+id).attr('src', img_src);
+		$('#'+id).attr('src', temp_img.src);
 	}
 	//加载失败
 	temp_img.onerror = function(){
 		$('#'+id).attr('src', '../images/u=3083093071,1461152719&fm=23&gp=0.jpg');
 	}
 	//预加载图片
-	temp_img.src =  img_src;
+	if (img_src.indexOf('http')===-1) {
+		temp_img.src = 'http://192.168.1.8:8700/B1Q1tzZqx/'+ img_src;
+	}
+	else {
+		temp_img.src =  img_src;
+	}
 }

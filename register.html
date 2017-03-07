@@ -14,7 +14,7 @@
 	</header>
 	<section id="main-content">
 	<!-- 登陆 -->
-		<form role="form" data-toggle="validator" method="post" action="http://192.168.1.8:8700/B1Q1tzZqx/v1/account/register" id="register-form" target="iframe">
+		<form role="form" data-toggle="validator" method="post" action="http://192.168.1.8:8700/B1Q1tzZqx/v1/account/register" id="register-form" onsubmit="return false">
 			<span><a href="login.html">登录</a></span><span class="check"><a href="register.html">注册</a></span>
 			<div class="form-group">
 				<input id="mobile" name="phone" type="text" class="form-control" placeholder="请输入手机号码" maxlength="11" required="required" data-required-error="请输入手机号" pattern="^1\d{10}$" data-pattern-error="请输入11位手机号">
@@ -43,12 +43,12 @@
 	<footer id="footer">
 		<p>Copyright © 2015-2016 jiefuzi.com All Rights Reserved | 陕ICP备 13044542号-2</p>
 	</footer>
-	<iframe name="iframe" frameborder="0" height="0" width="0;"></iframe>
 <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="http://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 <script src="http://cdn.bootcss.com/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+<script src="http://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
 
