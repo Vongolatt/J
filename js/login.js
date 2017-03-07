@@ -13,7 +13,7 @@ $(function(){
 				.done(function(dt) {
 					console.log(dt);
 					if (dt.status!=200) {
-						tip(dt);
+						tip(dt.message);
 						return;
 					}
 					var i=60;
@@ -24,7 +24,7 @@ $(function(){
 					},1000);
 				})
 				.fail(function(dt) {
-					tip(dt);
+					tip(dt.message);
 				});
 			}
 		else {
@@ -60,7 +60,7 @@ $(function(){
 		})
 		.done(function(dt) {
 			if (dt.status!=200) {
-				tip(dt);
+				tip(dt.message);
 				return;
 			}
 			//重新注册登录时先清楚个人信息;
@@ -81,14 +81,7 @@ $(function(){
 			else{window.location.href ='article/article.html'}
 		})
 		.fail(function(dt) {
-			tip(dt);
+			tip(dt.message);
 		});
 	});
 });
-function tip (dt) {
-	bootbox.alert({ 
-		size: "small",
-		title: "提示",
-		message: dt.message, 
-	}) 
-}

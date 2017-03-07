@@ -14,6 +14,18 @@ $(function(){
 			start_time = cur_time;
 		}
 	});
+	if(localStorage.token){
+		var str = "";
+		if (localStorage.gender=="男") {str+='<img src="../images/boy.png" alt="" class="sex">'}
+		if (localStorage.gender=="女") {str+='<img src="../images/girl.png" alt="" class="sex">'}
+		var avatar = localStorage.avatar|| "";
+		str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+localStorage.avatar+'" alt="">';
+		str+='<span>'+localStorage.name+'</span></br>';
+		var constellation =localStorage.constellation||"";
+		var city = localStorage.city ||"";		
+		str+='<span>'+city+'&nbsp;&nbsp;&nbsp;'+constellation+'</span>';
+		$('.wrap').append(str);
+	}
 })
 function loadArticle(){
 	$.ajax({
@@ -43,7 +55,7 @@ function loadArticle(){
 			str+='<a href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+_page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='<div><div class="left">';
-			str+='<img src="'+dt[i].user.avatar+'">';
+			str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].user.avatar+'">';
 			str+='<span>'+dt[i].user.name+'</span>';
 			str+='<span>'+moment(dt[i].create_time).format('YYYY-MM-DD HH:mm:ss')+'</span>';
 			str+='</div>';
@@ -55,12 +67,13 @@ function loadArticle(){
 			str+='<span>'+dt[i].preview_sum+'</span>';
 			str+='</div></div>';
 			str+='</div></section>';
-			preLoad_images('http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].cover,_page+''+i);		
+			preLoad_images(dt[i].cover,_page+''+i);		
 		}
 		//写入文章内容
 		$('#main-content').append(str);
 		_page++;
 	})
 	.fail(function() {
+		$('.loading').html('您还没有登陆');
 	});	
 }
