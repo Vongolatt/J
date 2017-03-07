@@ -1,6 +1,6 @@
 var _page =1;
 $(function(){
-	loadArticle(_page);
+	loadArticle();
 	//页面拉到底部加载评论;
 	var start_time =new Date();
 	$(window).scroll(function(event) {
@@ -14,6 +14,7 @@ $(function(){
 			start_time = cur_time;
 		}
 	});
+	//加载个人信息
 	if(localStorage.token){
 		var str = "";
 		if (localStorage.gender=="男") {str+='<img src="../images/boy.png" alt="" class="sex">'}
@@ -26,6 +27,16 @@ $(function(){
 		str+='<span>'+city+'&nbsp;&nbsp;&nbsp;'+constellation+'</span>';
 		$('.wrap').append(str);
 	}
+	//跳转文章详情
+	$('#main-content').on('click', 'a', function(event) {
+		var target = $(event.target).parents('section');
+		sessionStorage.img = target.find('img').attr('src');
+		sessionStorage.avatar = target.find('.left').children('img').attr('src');
+		sessionStorage.name = target.find('.left').children('span')[0].textContent;
+		sessionStorage.time = target.find('.left').children('span')[1].textContent;
+		sessionStorage.title = target.find('h2').text();
+		sessionStorage.content = target.find('p').text();
+	});
 })
 function loadArticle(){
 	$.ajax({
@@ -46,13 +57,13 @@ function loadArticle(){
 		}
 		dt=dt.data.articles;
 		var str='';
+		str+='<h1>文章(<span>'+dt.length+'</span>)</h1>';
 		//生成文章列表
 		for (var i = 0; i < dt.length; i++) {
-			str+='<h1>文章(<span>'+dt.length+'</span>)</h1>';
 			str+='<section class="article">';
-			str+='<a href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+_page+'"><img id="'+_page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
+			str+='<a href="../article/article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+_page+'"><img id="'+_page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
 			str+='<div class="wrap">';
-			str+='<a href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+_page+'"><h2>'+dt[i].title+'</h2></a>';
+			str+='<a href="../article/article_details.html?user_id='+dt[i]._id+'index='+i+'page='+_page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='<div><div class="left">';
 			str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].user.avatar+'">';
@@ -67,7 +78,7 @@ function loadArticle(){
 			str+='<span>'+dt[i].preview_sum+'</span>';
 			str+='</div></div>';
 			str+='</div></section>';
-			preLoad_images(dt[i].cover,_page+''+i);		
+			preLoad_images(dt[i].cover,_page+''+i);				
 		}
 		//写入文章内容
 		$('#main-content').append(str);

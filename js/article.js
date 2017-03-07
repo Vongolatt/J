@@ -17,6 +17,16 @@ $(function () {
 			start_time = cur_time;
 		}
 	});
+	//跳转文章详情
+	$('#main-content').on('click', 'a', function(event) {
+		var target = $(event.target).parents('section');
+		sessionStorage.img = target.find('img').attr('src');
+		sessionStorage.avatar = target.find('.left').children('img').attr('src');
+		sessionStorage.name = target.find('.left').children('span')[0].textContent;
+		sessionStorage.time = target.find('.left').children('span')[1].textContent;
+		sessionStorage.title = target.find('h2').text();
+		sessionStorage.content = target.find('p').text();
+	});
 });
 var _page = 1;
 function loadArticle (page) {
