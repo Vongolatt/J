@@ -50,9 +50,9 @@ function loadArticle (page) {
 		//生成文章列表
 		for (var i = 0; i < dt.length; i++) {
 			str+='<section class="article">';
-			str+='<a href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+page+'"><img id="'+page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
+			str+='<a target="_blank" href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+page+'"><img id="'+page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
 			str+='<div class="wrap">';
-			str+='<a href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+page+'"><h2>'+dt[i].title+'</h2></a>';
+			str+='<a target="_blank" href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='<div><div class="left">';
 			//判断头像来源

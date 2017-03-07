@@ -61,9 +61,9 @@ function loadArticle(){
 		//生成文章列表
 		for (var i = 0; i < dt.length; i++) {
 			str+='<section class="article">';
-			str+='<a href="../article/article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+_page+'"><img id="'+_page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
+			str+='<a target="_blank" href="../article/article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+_page+'"><img id="'+_page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
 			str+='<div class="wrap">';
-			str+='<a href="../article/article_details.html?user_id='+dt[i]._id+'index='+i+'page='+_page+'"><h2>'+dt[i].title+'</h2></a>';
+			str+='<a target="_blank" href="../article/article_details.html?user_id='+dt[i]._id+'index='+i+'page='+_page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='<div><div class="left">';
 			str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].user.avatar+'">';
