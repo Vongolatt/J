@@ -1,6 +1,7 @@
 var _page =1;
 $(function(){
-	loadArticle();
+	var id = getQueryString('user_id');
+	loadArticle(id,0);
 	//页面拉到底部加载评论;
 	var start_time =new Date();
 	$(window).scroll(function(event) {
@@ -15,20 +16,10 @@ $(function(){
 		}
 	});
 	//加载个人信息
-	if(localStorage.token){
+	if (sessionStorage.name) {
 		var str = "";
-		var background = localStorage.background;
-		if (background) {
-			$('.bg').css('background-image', 'url('+background+')');
-		}
-		if (localStorage.gender=="男") {str+='<img src="../images/boy.png" alt="" class="sex">'}
-		if (localStorage.gender=="女") {str+='<img src="../images/girl.png" alt="" class="sex">'}
-		var avatar = localStorage.avatar|| "";
-		str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+localStorage.avatar+'" alt="">';
-		str+='<span>'+localStorage.name+'</span></br>';
-		var constellation =localStorage.constellation||"";
-		var city = localStorage.city ||"";		
-		str+='<span>'+city+'&nbsp;&nbsp;&nbsp;'+constellation+'</span>';
+		str+='<img src="'+sessionStorage.avatar+'">';
+		str+='<span>&nbsp;&nbsp;&nbsp;'+sessionStorage.name+'&nbsp;&nbsp;&nbsp;</span></br>';
 		$('.wrap').append(str);
 	}
 	//跳转文章详情
@@ -44,48 +35,53 @@ $(function(){
 		sessionStorage.preview_sum = 0;
 	});
 })
-function loadArticle(){
+var _page = 0;
+function loadArticle (user_id,page) {
 	$.ajax({
-		url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/account/article/query',
+		url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/query/article',
 		type: 'GET',
 		dataType: 'json',
 		data: {
-			token:localStorage.token,
-			page:_page,
-			limit:10
-	}
+			user:user_id,
+			page:page,
+			limit:10,
+		},
 	})
 	.done(function(dt) {
 		//错误时返回;
-		if (dt.status!=200) {
-			$('.loading').html('您还没有登陆   <a href="../login.html">现在登陆</a>');
+		if (dt.status!=200||dt.data.articles.length==0) {
+			$('.loading').html('没有更多文章');
 			return false;
 		}
 		dt=dt.data.articles;
-		if (dt.length==0) return;
 		var str='';
-		str+='<h1>文章(<span>'+dt.length+'</span>)</h1>';
 		//生成文章列表
 		for (var i = 0; i < dt.length; i++) {
 			str+='<section class="article">';
-			str+='<a target="_blank" href="../article/article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+_page+'"><img id="'+_page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
+			str+='<a target="_blank" href="../article/article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+page+'"><img id="'+page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
 			str+='<div class="wrap">';
-			str+='<a target="_blank" href="../article/article_details.html?user_id='+dt[i]._id+'index='+i+'page='+_page+'"><h2>'+dt[i].title+'</h2></a>';
+			str+='<a target="_blank" href="../article/article_details.html?user_id='+dt[i]._id+'index='+i+'page='+page+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='<div><div class="left">';
-			str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].user.avatar+'">';
+			//判断头像来源
+			if (dt[i].user.avatar.indexOf('http')===-1) {
+				str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].user.avatar+'">';
+			}
+			else{str+='<img src="'+dt[i].user.avatar+'">';}
 			str+='<span>'+dt[i].user.name+'</span>';
 			str+='<span>'+moment(dt[i].create_time).format('YYYY-MM-DD HH:mm:ss')+'</span>';
 			str+='</div>';
 			str+='<div class="right">';
 			str+='<img src="../images/like.png" class="like">';
 			str+='<span class="num">+1</span>';
-			str+='<span>0</span>';
+			var praise_sum = dt[i].praise_sum||0;
+			str+='<span>'+praise_sum+'</span>';
+			var preview_sum = dt[i].preview_sum || 0;
 			str+='<img src="../images/saw.png">';
-			str+='<span>0</span>';
+			str+='<span>'+preview_sum+'</span>';
 			str+='</div></div>';
 			str+='</div></section>';
-			preLoad_images(dt[i].cover,_page+''+i);				
+			preLoad_images(dt[i].cover,page+''+i);		
 		}
 		//写入文章内容
 		$('#main-content').append(str);
@@ -93,6 +89,6 @@ function loadArticle(){
 		_page++;
 	})
 	.fail(function() {
-		$('.loading').html('您还没有登陆');
-	});	
+		$('#main-content').html('获取文章列表失败,请稍后重试');
+	})
 }

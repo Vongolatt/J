@@ -30,7 +30,7 @@ $(function () {
 		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
 			//比较两次请求时间是否过短 
 			var cur_time = new Date();
-			if (cur_time-start_time<1000) return;
+			if (cur_time-start_time<1000||$('.loading').text()=='没有更多评论') return;
 			//延时加载评论列表
 			setTimeout(get_commenList,1000);
 			start_time = cur_time;
@@ -52,22 +52,21 @@ $(function () {
 		},
 		})
 		.done(function(dt) {
-			if (dt.status!=200) {//motaikuang
+			if (dt.status!=200) {
+				tip('无法提交评论,请稍后重试');
 				return;
 			}
 			// 清空评论列表
 			$('.comment').children('section').remove();
 			// 重新加载评论列表;
-			page=1;
+			_page=1;
 			get_commenList ()
 		});	
 	});
 })
 //取到用户id;
 var _id = getQueryString('user_id');
-var index =getQueryString('index');
-var page = getQueryString('page');
-
+var _page = 1;
 function get_commenList (){
 //加载评论列表;
 	$.ajax({
@@ -76,7 +75,7 @@ function get_commenList (){
 	dataType: 'json',
 	data: {
 		article:_id,
-		page:page,
+		page:_page,
 		limit:10,
 	},
 	})
@@ -107,7 +106,8 @@ function get_commenList (){
 		}
 		//插入文档
 		$('.comment').append(str);
-		page++;
+		if (dt.length<10) $('.loading').html('没有更多评论');
+		_page++;
 	})
 	.fail(function() {
 		$('.comment').append('没有更多评论');

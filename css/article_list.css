@@ -55,6 +55,7 @@ body{
 	vertical-align: top;
 }
 #main-content .left{
+	color: #000;
 	cursor: pointer;
 }
 #main-content .right{

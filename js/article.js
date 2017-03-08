@@ -52,11 +52,11 @@ function loadArticle (page) {
 		//生成文章列表
 		for (var i = 0; i < dt.length; i++) {
 			str+='<section class="article">';
-			str+='<a target="_blank" href="article_details.html?user_id='+dt[i]._id+'&index='+i+'&page='+page+'"><img id="'+page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
+			str+='<a target="_blank" href="article_details.html?user_id='+dt[i]._id+'"><img id="'+page+''+i+'" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg"></a>';
 			str+='<div class="wrap">';
-			str+='<a target="_blank" href="article_details.html?user_id='+dt[i]._id+'index='+i+'page='+page+'"><h2>'+dt[i].title+'</h2></a>';
+			str+='<a target="_blank" href="article_details.html?user_id='+dt[i]._id+'"><h2>'+dt[i].title+'</h2></a>';
 			str+='<p>'+dt[i].content+'</p>';
-			str+='<div><div class="left">';
+			str+='<div><a href="../user/other.html?user_id='+dt[i].user._id+'"><div class="left">';
 			//判断头像来源
 			if (dt[i].user.avatar.indexOf('http')===-1) {
 				str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].user.avatar+'">';
@@ -64,7 +64,7 @@ function loadArticle (page) {
 			else{str+='<img src="'+dt[i].user.avatar+'">';}
 			str+='<span>'+dt[i].user.name+'</span>';
 			str+='<span>'+moment(dt[i].create_time).format('YYYY-MM-DD HH:mm:ss')+'</span>';
-			str+='</div>';
+			str+='</div></a>';
 			str+='<div class="right">';
 			str+='<img src="../images/like.png" class="like">';
 			str+='<span class="num">+1</span>';

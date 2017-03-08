@@ -199,3 +199,6 @@ body{
 	vertical-align: middle;
 	margin-left: 20px;
 }
+.loading a{
+	color: #7f4a88;
+}
