@@ -2,36 +2,9 @@ $(function () {
 	//开始是假用来判断瀑布流多次相应ajax时阻止请求;
 	var start_time = new Date();
 	//请求文章列表
-	loadArticle(_page);
-	//lazyload
-	$(window).scroll(function(event) {
-		var loading = document.querySelector('.loading');
-		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
-			//比较两次请求时间是否过短 
-			var cur_time = new Date();
-			if (cur_time-start_time<1000) return;
-			//延时加载
-			setTimeout(function () {
-				loadArticle(_page);
-			},1000);
-			start_time = cur_time;
-		}
-	});
-	//跳转文章详情
-	$('#main-content').on('click', 'a', function(event) {
-		var target = $(event.target).parents('section');
-		sessionStorage.img = target.find('img').attr('src');
-		sessionStorage.avatar = target.find('.left').children('img').attr('src');
-		sessionStorage.name = target.find('.left').children('span')[0].textContent;
-		sessionStorage.time = target.find('.left').children('span')[1].textContent;
-		sessionStorage.title = target.find('h2').text();
-		sessionStorage.content = target.find('p').text();
-		sessionStorage.praise_sum = target.find('.right').children('span')[1].textContent;;
-		sessionStorage.preview_sum = target.find('.right').children('span')[2].textContent;;
-	});
-});
-var _page = 1;
-function loadArticle (page) {
+	var loadArticle = (function () {
+		var page = 1;
+		return  function  () {
 	$.ajax({
 		url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/query/article',
 		type: 'GET',
@@ -79,10 +52,40 @@ function loadArticle (page) {
 		}
 		//写入文章内容
 		$('#main-content').append(str);
-		_page++;
+		page++;
 	})
 	.fail(function() {
 		$('#main-content').html('请求内容失败，请稍后重试');
 	})
-}
+};		
+	})();
+	loadArticle();
+	//lazyload
+	$(window).scroll(function(event) {
+		var loading = document.querySelector('.loading');
+		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
+			//比较两次请求时间是否过短 
+			var cur_time = new Date();
+			if (cur_time-start_time<1000) return;
+			//延时加载
+			setTimeout(function () {
+				loadArticle();
+			},1000);
+			start_time = cur_time;
+		}
+	});
+	//跳转文章详情
+	$('#main-content').on('click', 'a', function(event) {
+		var target = $(event.target).parents('section');
+		sessionStorage.img = target.find('img').attr('src');
+		sessionStorage.avatar = target.find('.left').children('img').attr('src');
+		sessionStorage.name = target.find('.left').children('span')[0].textContent;
+		sessionStorage.time = target.find('.left').children('span')[1].textContent;
+		sessionStorage.title = target.find('h2').text();
+		sessionStorage.content = target.find('p').text();
+		sessionStorage.praise_sum = target.find('.right').children('span')[1].textContent;;
+		sessionStorage.preview_sum = target.find('.right').children('span')[2].textContent;;
+	});
+});
+
 

@@ -1,5 +1,6 @@
 $(function () {
 	//页面主题部分;	
+	if (!sessionStorage.content) {$('#main-content').html('<p>页面错误<a href="article.html" style="color:#000;">返回文章列表</a></p>');return;}
 	(function(){
 		// 生成文章详情;
 		var str='<h4>'+sessionStorage.title+'</h4>';
