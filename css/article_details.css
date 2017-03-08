@@ -125,9 +125,7 @@ body{
 	transition: height .3s;
 	z-index: 1;
 }
-#main-content .hid>img{
-	width: 81.8%;
-	height: 130px;
+#main-content .hid>canvas{
 	margin-top: 12px;
 }
 #footer>p{

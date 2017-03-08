@@ -5,7 +5,7 @@ $(function () {
 		var str='<h4>'+sessionStorage.title+'</h4>';
 		str+='<span class="share"><img src="../images/share.png">';
 		str+='<div class="hid">';
-		str+='<span>请使用微信扫一扫</span><img src="" alt="">';
+		str+='<span id="qrcode">请使用微信扫一扫</span>'
 		str+='</div></span>';
 		str+='<div class="wrap"><div class="left">';
 		str+='<img src="'+sessionStorage.avatar+'">';
@@ -22,6 +22,9 @@ $(function () {
 		str+='<textarea placeholder="我有话要说"></textarea>';
 		str+='<button class="btn">提&nbsp;&nbsp;&nbsp;&nbsp;交</button></div>';
 		$('#main-content').prepend(str);
+		$('.hid').qrcode({
+			width:130,height:130,correctLevel:0,text:window.location.href
+		});  
 	})();
 	//页面拉到底部加载评论;
 	var start_time =new Date();
