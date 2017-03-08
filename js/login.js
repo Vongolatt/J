@@ -16,11 +16,16 @@ $(function(){
 						tip(dt.message);
 						return;
 					}
-					var i=60;
-					$('#captch').prop('disabled', true).html('60s');
-					setInterval(function(){
+					//倒计时
+					var i=30;
+					$('#captch').prop('disabled', true).html(i+'s');
+					var count_down = setInterval(function(){
 						i--;
 						$('#captch').html(i+'s');
+						if (i==0) {
+							clearInterval(count_down);
+							$('#captch').prop('disabled', false).html('获取验证码');
+						}
 					},1000);
 				})
 				.fail(function(dt) {

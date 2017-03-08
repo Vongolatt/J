@@ -26,6 +26,8 @@ $(function () {
 		sessionStorage.time = target.find('.left').children('span')[1].textContent;
 		sessionStorage.title = target.find('h2').text();
 		sessionStorage.content = target.find('p').text();
+		sessionStorage.praise_sum = target.find('.right').children('span')[1].textContent;;
+		sessionStorage.preview_sum = target.find('.right').children('span')[2].textContent;;
 	});
 });
 var _page = 1;
@@ -66,9 +68,11 @@ function loadArticle (page) {
 			str+='<div class="right">';
 			str+='<img src="../images/like.png" class="like">';
 			str+='<span class="num">+1</span>';
-			str+='<span>'+dt[i].praise_sum+'</span>';
+			var praise_sum = dt[i].praise_sum||0;
+			str+='<span>'+praise_sum+'</span>';
+			var preview_sum = dt[i].preview_sum || 0;
 			str+='<img src="../images/saw.png">';
-			str+='<span>'+dt[i].preview_sum+'</span>';
+			str+='<span>'+preview_sum+'</span>';
 			str+='</div></div>';
 			str+='</div></section>';
 			preLoad_images(dt[i].cover,page+''+i);		

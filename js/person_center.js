@@ -36,6 +36,8 @@ $(function(){
 		sessionStorage.time = target.find('.left').children('span')[1].textContent;
 		sessionStorage.title = target.find('h2').text();
 		sessionStorage.content = target.find('p').text();
+		sessionStorage.praise_sum = 0;
+		sessionStorage.preview_sum = 0;
 	});
 })
 function loadArticle(){
@@ -73,9 +75,9 @@ function loadArticle(){
 			str+='<div class="right">';
 			str+='<img src="../images/like.png" class="like">';
 			str+='<span class="num">+1</span>';
-			str+='<span>'+dt[i].praise_sum+'</span>';
+			str+='<span>0</span>';
 			str+='<img src="../images/saw.png">';
-			str+='<span>'+dt[i].preview_sum+'</span>';
+			str+='<span>0</span>';
 			str+='</div></div>';
 			str+='</div></section>';
 			preLoad_images(dt[i].cover,_page+''+i);				

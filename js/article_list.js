@@ -12,16 +12,15 @@ $(function () {
 		str+='<span>'+sessionStorage.name+'</span><span>'+sessionStorage.time+'</span>';
 		str+='</div>';
 		str+='<div class="right">';
-		str+='<img src="../images/like.png" class="like"><span class="num">+1</span><span>0</span><img src="../images/saw.png"><span>0</span>';
+		str+='<img src="../images/like.png" class="like"><span class="num">+1</span><span>'+sessionStorage.praise_sum+'</span><img src="../images/saw.png"><span>'+sessionStorage.preview_sum+'</span>';
 		str+='</div></div>';
-		str+='<img id="cover" src="../images/314e251f95cad1c85db27e6c773e6709c93d5174.jpg">';
-		str+='<div class="article"><p>'+sessionStorage.content+'<p></div>';
+		str+='<img id="cover" src="'+sessionStorage.img+'">';
+		str+='<div class="article"><p>'+sessionStorage.content+'</p></div>';
 		//我要评论
 		str+='<div class="comment">';
 		str+='<h5>文章点评</h5>';
 		str+='<textarea placeholder="我有话要说"></textarea>';
 		str+='<button class="btn">提&nbsp;&nbsp;&nbsp;&nbsp;交</button></div>';
-		preLoad_images(sessionStorage.img,'cover');
 		$('#main-content').prepend(str);
 	})();
 	//页面拉到底部加载评论;
@@ -92,12 +91,17 @@ function get_commenList (){
 		for (var i = 0; i < dt.length; i++) {
 			str+='<section>';
 			str+='<div class="left">';
-			str+='<img src="'+dt[i].user.avatar+'" alt="">';
+			//判断头像来源
+			if (dt[i].user.avatar.indexOf('http')===-1) {
+				str+='<img src="http://192.168.1.8:8700/B1Q1tzZqx/'+dt[i].user.avatar+'">';
+			}
+			else{str+='<img src="'+dt[i].user.avatar+'">';}
 			str+='<span>'+dt[i].user.name+'</span>';
 			str+='<span>'+moment(dt[i].create_time).format('YYYY-MM-DD HH:mm:ss')+'</span>';
 			str+='<div class="right">';
 			str+='<img src="../images/like.png" class="like"><span class="num">+1</span>';
-			str+='<span>'+dt[i].praise_sum+'</span></div>';
+			var praise_sum = dt[i].praise_sum||0;
+			str+='<span>'+praise_sum+'</span></div>';
 			str+='<p>'+dt[i].content+'</p>';
 			str+='</div></section>';						
 		}

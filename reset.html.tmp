@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>重设密码</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
-	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico"><link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/login.css">
 </head>
