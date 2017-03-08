@@ -16,11 +16,20 @@ $(function(){
 	});
 	//加载个人信息
 	if(localStorage.token){
-		var str = "";
-		var background = localStorage.background;
-		if (background) {
-			$('.bg').css('background-image', 'url('+background+')');
+		//预加载背景图
+		if (localStorage.background) {
+			var temp_img = new Image();
+			//图片加载成功后，替换临时图片
+			temp_img.onload = function(){
+				$('.bg').css('background-image','url('+temp_img.src+')');
+			}
+			//加载失败
+			temp_img.onerror = function(){
+					$('.bg').attr('src', '../images/u=3083093071,1461152719&fm=23&gp=0.jpg');
+			}
+			temp_img.src =  localStorage.background;
 		}
+		var str = "";
 		if (localStorage.gender=="男") {str+='<img src="../images/boy.png" alt="" class="sex">'}
 		if (localStorage.gender=="女") {str+='<img src="../images/girl.png" alt="" class="sex">'}
 		var avatar = localStorage.avatar|| "";

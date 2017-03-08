@@ -53,7 +53,7 @@ $(function () {
 		})
 		.done(function(dt) {
 			if (dt.status!=200) {
-				tip('无法提交评论,请稍后重试');
+				tip(dt.message);
 				return;
 			}
 			// 清空评论列表
@@ -96,13 +96,15 @@ function get_commenList (){
 			}
 			else{str+='<img src="'+dt[i].user.avatar+'">';}
 			str+='<span>'+dt[i].user.name+'</span>';
-			str+='<span>'+moment(dt[i].create_time).format('YYYY-MM-DD HH:mm:ss')+'</span>';
+			var duration_time = (moment().unix()-dt[i].create_time/1000);
+			str+='<span>'+moment.duration(duration_time,'seconds').humanize(true);+'</span>';
 			str+='<div class="right">';
 			str+='<img src="../images/like.png" class="like"><span class="num">+1</span>';
 			var praise_sum = dt[i].praise_sum||0;
 			str+='<span>'+praise_sum+'</span></div>';
 			str+='<p>'+dt[i].content+'</p>';
-			str+='</div></section>';						
+			str+='</div></section>';
+			// console.log(.format('YYYY-MM-DD HH:mm:ss'))						
 		}
 		//插入文档
 		$('.comment').append(str);

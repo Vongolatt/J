@@ -42,11 +42,11 @@ body{
 	line-height: 30px;
 	font-size: 0;
 }
-#header.scroll div>img:first-child{
+#header.scroll div>a:first-child img{
 	transform: scale(.8);	
 	margin-top: -3px;
 }
-#header div>img:first-child{
+#header div>a:first-child img{
 	width: 35px;
 	height: 35px;
 	margin-right: 8px;

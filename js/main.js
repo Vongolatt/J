@@ -40,7 +40,7 @@ $(function () {
 	//判断登陆状态;
 	if (localStorage.token) {
 		//登陆成功显示用户信息;
-		var login_info = '<img src=http://192.168.1.8:8700/B1Q1tzZqx/'+localStorage.avatar+' alt="">';
+		var login_info = '<a href="http://www.j.com/project/J/user/user.html"><img src=http://192.168.1.8:8700/B1Q1tzZqx/'+localStorage.avatar+'></a>';
 			login_info+= '<span>'+localStorage.name+'<img src="../images/pull_down.png" alt="">';
 			login_info+='<div class="hid">';
 			login_info+='<a href="../user/user.html" class="icon icon1"></a>';
