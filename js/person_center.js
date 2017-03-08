@@ -17,6 +17,10 @@ $(function(){
 	//加载个人信息
 	if(localStorage.token){
 		var str = "";
+		var background = localStorage.background;
+		if (background) {
+			$('.bg').css('background-image', 'url('+background+')');
+		}
 		if (localStorage.gender=="男") {str+='<img src="../images/boy.png" alt="" class="sex">'}
 		if (localStorage.gender=="女") {str+='<img src="../images/girl.png" alt="" class="sex">'}
 		var avatar = localStorage.avatar|| "";

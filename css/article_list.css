@@ -54,6 +54,9 @@ body{
 	height: 36px;
 	vertical-align: top;
 }
+#main-content .left{
+	cursor: pointer;
+}
 #main-content .right{
 	width: 44%;
 }
