@@ -1,25 +1,13 @@
-var _page =1;
 $(function(){
-	var id = getQueryString('user_id');
-	loadArticle(id,0);
+	loadArticle(1);
 	//页面拉到底部加载评论;
 	var start_time =new Date();
-	$(window).scroll(function(event) {
-		var loading = document.querySelector('.loading');
-		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
-			//比较两次请求时间是否过短 
-			var cur_time = new Date();
-			if (cur_time-start_time<1000||$('.loading').text()=='没有更多文章') return;
-			//延时加载评论列表
-			setTimeout(loadArticle,1000);
-			start_time = cur_time;
-		}
-	});
+	$(window).scroll(throttle (loadArticle));
 	//加载个人信息
 	if (sessionStorage.name) {
 		var str = "";
 		str+='<img src="'+sessionStorage.avatar+'">';
-		str+='<span>&nbsp;&nbsp;&nbsp;'+sessionStorage.name+'&nbsp;&nbsp;&nbsp;</span></br>';
+		str+='<span>&nbsp;&nbsp;&nbsp;&nbsp;'+sessionStorage.name+'&nbsp;&nbsp;&nbsp;&nbsp;</span></br>';
 		$('.wrap').append(str);
 	}
 	//跳转文章详情
@@ -35,14 +23,13 @@ $(function(){
 		sessionStorage.preview_sum = 0;
 	});
 })
-var _page = 0;
-function loadArticle (user_id,page) {
+function loadArticle (page) {
 	$.ajax({
 		url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/query/article',
 		type: 'GET',
 		dataType: 'json',
 		data: {
-			user:user_id,
+			user:getQueryString('user_id'),
 			page:page,
 			limit:10,
 		},
@@ -86,7 +73,6 @@ function loadArticle (user_id,page) {
 		//写入文章内容
 		$('#main-content').append(str);
 		if (dt.length<10) $('.loading').html('没有更多文章');
-		_page++;
 	})
 	.fail(function() {
 		$('#main-content').html('获取文章列表失败,请稍后重试');

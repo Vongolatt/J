@@ -1,6 +1,7 @@
 $(function () {
-	//页面主题部分;	
+	//参数错误时返回;
 	if (!sessionStorage.content) {$('#main-content').html('<p>页面错误<a href="article.html" style="color:#000;">返回文章列表</a></p>');return;}
+	//生成页面主体部分;	
 	(function(){
 		// 生成文章详情;
 		var str='<h4>'+sessionStorage.title+'</h4>';
@@ -23,23 +24,12 @@ $(function () {
 		str+='<textarea placeholder="我有话要说"></textarea>';
 		str+='<button class="btn">提&nbsp;&nbsp;&nbsp;&nbsp;交</button></div>';
 		$('#main-content').prepend(str);
-		$('.hid').qrcode({
+		$('.hid').last().qrcode({
 			width:130,height:130,correctLevel:0,text:window.location.href
 		});  
 	})();
 	//页面拉到底部加载评论;
-	var start_time =new Date();
-	$(window).scroll(function(event) {
-		var loading = document.querySelector('.loading');
-		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
-			//比较两次请求时间是否过短 
-			var cur_time = new Date();
-			if (cur_time-start_time<1000||$('.loading').text()=='没有更多评论') return;
-			//延时加载评论列表
-			setTimeout(get_commenList,1000);
-			start_time = cur_time;
-		}
-	});
+	$(window).scroll(throttle(get_commenList,1));
 	//我要评论
 	$('#main-content').on('click', '.btn', function() {
 		//取到评论内容
@@ -51,9 +41,9 @@ $(function () {
 		dataType: 'json',
 		data: {
 			token:localStorage.token,
-			article:_id,
+			article:getQueryString('user_id'),
 			content:comment_content,
-		},
+			},
 		})
 		.done(function(dt) {
 			if (dt.status!=200) {
@@ -68,17 +58,14 @@ $(function () {
 		});	
 	});
 })
-//取到用户id;
-var _id = getQueryString('user_id');
-var _page = 1;
-function get_commenList (){
+function get_commenList (_page){
 //加载评论列表;
 	$.ajax({
 	url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/query/comment',
 	type: 'GET',
 	dataType: 'json',
 	data: {
-		article:_id,
+		article:getQueryString('user_id'),
 		page:_page,
 		limit:10,
 	},

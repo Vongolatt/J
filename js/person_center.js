@@ -1,19 +1,7 @@
-var _page =1;
 $(function(){
-	loadArticle();
+	loadArticle(1);
 	//页面拉到底部加载评论;
-	var start_time =new Date();
-	$(window).scroll(function(event) {
-		var loading = document.querySelector('.loading');
-		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
-			//比较两次请求时间是否过短 
-			var cur_time = new Date();
-			if (cur_time-start_time<1000||$('.loading').text()=='没有更多文章') return;
-			//延时加载评论列表
-			setTimeout(loadArticle,1000);
-			start_time = cur_time;
-		}
-	});
+	$(window).scroll(throttle (loadArticle));
 	//加载个人信息
 	if(localStorage.token){
 		//预加载背景图
@@ -53,7 +41,7 @@ $(function(){
 		sessionStorage.preview_sum = 0;
 	});
 })
-function loadArticle(){
+function loadArticle(_page){
 	$.ajax({
 		url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/account/article/query',
 		type: 'GET',
@@ -99,7 +87,6 @@ function loadArticle(){
 		//写入文章内容
 		$('#main-content').append(str);
 		if (dt.length<10) $('.loading').html('没有更多文章');
-		_page++;
 	})
 	.fail(function() {
 		$('.loading').html('您还没有登陆');

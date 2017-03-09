@@ -1,7 +1,6 @@
-var _file;
 $(function(){
+	//请求省级联接口
 	(function(){
-		//请求省级联接口
 		$.ajax({
 			url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/query/city/province',
 			type: 'GET',
@@ -64,8 +63,8 @@ $(function(){
 			$('#province').after(str);
 		});	
 	});
+	//请求星座接口
 	(function(){
-		//请求星座接口
 		$.ajax({
 			url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/query/constellation',
 			type: 'GET',
@@ -95,25 +94,27 @@ $(function(){
 	$('.up').click(function(event) {
 		$('#upload').click();
 	});
-	var _imgURL;
 	//判断是否上传文件
-	$('#upload').change(function(event) {
-		if (this.files.length==0) return;
-		//获取文件信息
-		_file = this.files[0];
-		// 获取 window 的 URL 工具
-      	var URL = window.URL || window.webkitURL;
-		//清空原来的图片预览
-		URL.revokeObjectURL(_imgURL);
-      	// 通过 file 生成目标 url
-      	_imgURL = URL.createObjectURL(_file);
-      	// 用这个 URL 产生一个 <img> 将其显示出来
-		var str='<img src="'+_imgURL+'" alt="">';
-		//将预览图片插入文档流
-		$('#main-content').find('.up').html(str);
-	});
+	$('#upload').change((function() {
+		var imgURL;
+		return function(){
+			if (this.files.length==0) return;
+			//获取文件信息
+			var file = this.files[0];
+			// 获取 window 的 URL 工具
+	      	var URL = window.URL || window.webkitURL;
+			//清空原来的图片预览
+			URL.revokeObjectURL(imgURL);
+	      	// 通过 file 生成目标 url
+	      	imgURL = URL.createObjectURL(file);
+	      	// 用这个 URL 产生一个 <img> 将其显示出来
+			var str='<img src="'+imgURL+'" alt="">';
+			//将预览图片插入文档流
+			$('#main-content').find('.up').html(str);
+		}
+	})());
+	//整合数据
 	$('button').click(function(event) {
-		//整合数据
 		var formData = new FormData();
 		formData.append('token',localStorage.token);
 
@@ -126,7 +127,8 @@ $(function(){
 			formData.append('city',$('#province').val());
 		}
 		if ($("input[name='sex']:checked").val()!='') formData.append('gender',$("input[name='sex']:checked").val());
-		if (_file!=undefined) formData.append('avatar',_file);
+		var file = $('#upload')[0].files[0];
+		if (file!=undefined) formData.append('avatar',file);
 		if ($('#constellation').val()!='请选择') formData.append('constellation',$('#constellation').val());
 		$.ajax({
 			url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/account/profile',

@@ -59,7 +59,7 @@ $(function () {
 	});
 //jq结尾
 });
-function scrollListern (argument) {
+function scrollListern () {
 	//返回顶部
 	if (document.body.scrollTop>200) {
 		$('#backTop').css('display', 'block');
@@ -100,6 +100,7 @@ function preLoad_images(img_src,id){
 		temp_img.src =  img_src;
 	}
 }
+//boot提示框
 function tip (message,fun) {
 	bootbox.alert({ 
 		size: "small",
@@ -108,4 +109,23 @@ function tip (message,fun) {
 		backdrop: true,
 		callback: fun
 	}) 
+}
+//延时加载
+function throttle (fun,pg) {
+	//开始是假用来判断瀑布流多次相应ajax时阻止请求;
+	var start_time = new Date();
+	var page = pg||2;
+	var loading = document.querySelector('.loading');
+	return function () {
+		if(loading.getBoundingClientRect().top+loading.offsetHeight<document.body.clientHeight){
+			//比较两次请求时间是否过短 
+			var cur_time = new Date();
+			if (cur_time-start_time<1000||$('.loading').text()=='没有更多文章') return;
+			//延时加载
+			setTimeout(function () {
+				fun(page++);
+			},1000);
+			start_time = cur_time;
+		}
+	}
 }
