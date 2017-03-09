@@ -37,16 +37,10 @@ body{
 	text-indent: 5%;
 	margin-bottom: 30px;
 	height: 72px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
 	overflow: hidden;
-}
-#main-content .wrap>p::after{
-	content:'...';
-	position: absolute;
-	text-indent: 0;
-	bottom: 0;
-	right: 6px;
-	width: 17px;
-	background-color: #fff;
 }
 #main-content .left,#main-content .right{
 	display: inline-block;
