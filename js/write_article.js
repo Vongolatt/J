@@ -7,20 +7,9 @@ $(function(){
 	$('#upload').change((function(event) {
 		var _imgURL;
 		return function(){
-			if (this.files.length==0) return;
 			//获取文件信息
-			var _file = this.files[0];
-			// 获取 window 的 URL 工具
-	      	var URL = window.URL || window.webkitURL;
-			//清空原来的图片预览
-			URL.revokeObjectURL(_imgURL);
-	      	// 通过 file 生成目标 url
-	      	_imgURL = URL.createObjectURL(_file);
-	      	// 用这个 URL 产生一个 <img> 将其显示出来
-			var str='<img src="'+_imgURL+'" alt="">';
-				str+='<div class="change-view width">更换图片</div>';
-			//将预览图片插入文档流
-			$('#main-content').find('.up').html(str).removeClass('upload-background').addClass('width');
+			var _file = this.files;
+			uploadImg(_file);
 		}
 	})());
 	//拖拽图片上传
@@ -35,26 +24,13 @@ $(function(){
 	}
 	document.querySelector('.up').ondragleave = function (e) {
 		/* body... */
+		if (!this.querySelector('p')) return;
 		this.querySelector('p').innerHTML = '请将图片文件拖拽至此区域！';
 	}
 	document.querySelector('.up').ondrop = function (e) {
 		e.preventDefault();
-		if (e.dataTransfer.files.length>1) {
-			this.querySelector('p').innerHTML = '只能上传一张图片！';return;
-		}
-		var _file = e.dataTransfer.files[0];
-		console.log(_file.type);
-		if (_file.type.indexOf('png')==-1&&_file.type.indexOf('jpeg')==-1) {tip('上传文件不合法');return;}
-		// 获取 window 的 URL 工具
-      	var URL = window.URL || window.webkitURL;
-      	// 通过 file 生成目标 url
-      	var _imgURL = URL.createObjectURL(_file);
-      	// 用这个 URL 产生一个 <img> 将其显示出来
-		var str='<img src="'+_imgURL+'" alt="">';
-		str+='<div class="change-view width">更换图片</div>';
-		//将预览图片插入文档流
-		$('#main-content').find('.up').html(str).removeClass('upload-background').addClass('width');
-		$('#upload')[0].files = e.dataTransfer.files;
+		var _file = e.dataTransfer.files;
+		$('#upload')[0].files = _file;
 	}
 	//发表文章
 	$('#header').on('click', 'img', function(event) {
@@ -69,7 +45,6 @@ $(function(){
 		formData.append('token',localStorage.token);
 		formData.append('title',document.querySelector('#title').value);
 		formData.append('content',document.querySelector('textarea').value);
-		console.log(formData);
 		$.ajax({
 			url: 'http://192.168.1.8:8700/B1Q1tzZqx/v1/account/article/add',
 			type: 'POST',
@@ -78,8 +53,29 @@ $(function(){
 			processData: false,  // 告诉jQuery不要去处理发送的数据
 	  		contentType: false   // 告诉jQuery不要去设置Content-Type请求头
 		})
-		.done(function() {
+		.done(function(dt) {
+			if (dt.status!=200) {tip('内容不能为空！'); return;}
 			window.location.href= 'user.html';
 		});	
 	});
 })
+function uploadImg(_file) {
+	if (!_file) return;
+	if (_file.length>1) {
+		tip('只能上传一张图片');return;
+	}
+	if (_file[0].size/1024/1024>3) {
+		tip('图片必须小于3MB');return;
+	}
+	console.log(_file[0].type);
+	if (_file[0].type.indexOf('png')==-1&&_file[0].type.indexOf('jpeg')==-1) {tip('上传文件不合法');return;}
+	// 获取 window 的 URL 工具
+  	var URL = window.URL || window.webkitURL;
+  	// 通过 file 生成目标 url
+  	var _imgURL = URL.createObjectURL(_file[0]);
+  	// 用这个 URL 产生一个 <img> 将其显示出来
+	var str='<img src="'+_imgURL+'" alt="">';
+	str+='<div class="change-view width">更换图片</div>';
+	//将预览图片插入文档流
+	$('#main-content').find('.up').html(str).removeClass('upload-background').addClass('width');
+}
